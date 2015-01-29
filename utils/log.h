@@ -7,4 +7,4 @@
 
 #include <stdio.h>
 
-int write(char *filepath[],char *string[]);
+int write(char *filepath,char *string);
