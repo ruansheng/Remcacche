@@ -7,4 +7,4 @@
 
 #include <stdio.h>
 
-int write(char *filepath,char *string);
+int r_write(char *filepath,char *string);

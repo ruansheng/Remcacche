@@ -13,31 +13,27 @@
 
 char * get_time();
 
-int write(char *filepath,char *string){
+int r_write(char *filepath,char *string){
 	FILE *handler;
 	handler=fopen(filepath,"at+");
 	if(handler==NULL){
 		return -1;
 	}
-	char * buffer;
-	buffer=(char *)malloc(128*sizeof(char));
-	buffer=get_time();        
-	printf("%s\n",buffer);
+	char *buffer;
+	buffer=get_time();
 	fputs(buffer,handler);
 	fputs(string,handler);
-        fputs("\n",handler);
+    fputs("\n",handler);
 	fclose(handler);
 	return 0;
 }
 
-char * get_time(char *date){
+char * get_time(){
 	struct tm *curtime_date;
-        time_t curtime;
-        time(&curtime);
-        char buffer[128];
-        curtime_date=localtime(&curtime);
-        strftime(buffer,sizeof(buffer),"[%Y/%m/%d %H:%M:%S]	",curtime_date);
-	printf("%s\n",buffer);
-	date=buffer;
-	return date;
+	time_t curtime;
+	time(&curtime);
+	static char buffer[128];
+	curtime_date=localtime(&curtime);
+	strftime(buffer,sizeof(buffer),"[%Y-%m-%d %H:%M:%S]	",curtime_date);
+	return buffer;
 }

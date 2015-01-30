@@ -3,6 +3,6 @@
 #include "../utils/log.h"
 
 void main(){
-  int status = write("remcache.log","hello world !");
+  int status = r_write("remcache.log","hello world !");
   printf("%d\n",status);
 }
