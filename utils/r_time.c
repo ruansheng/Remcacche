@@ -7,6 +7,7 @@
 
 
 #include <stdio.h>
+#include <time.h>
 #include "r_time.h"
 
 char * get_time(){
