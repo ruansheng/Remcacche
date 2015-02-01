@@ -5,24 +5,25 @@
  *      Author: root
  */
 
-nclude <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "r_hash.h"
 
 #define INDEX 128
 
-type struct Node HashTable;
+typedef struct Node HashTable;
 
 /**
 * get index
 */
 int get_index(char *key){
   if(key==NULL){
-     return -0;
+     return -1;
   }
   int total=0;
-  while(*a!='\0'){
-    total+=*a;
-    a++;
+  while(*key!='\0'){
+    total+=*key;
+    key++;
   }
   int index=total%INDEX;
   return index;
@@ -32,18 +33,17 @@ int get_index(char *key){
 /**
 * init HashTable
 */
-HashTable* h_init(){
-  HashTable *head;
+int h_init(HashTable *head){
   head=(HashTable *)malloc(sizeof(HashTable));
   if(head==NULL){
-    return NULL;
+    return -1;
   }
   head->next=NULL;
-  return head;
+  return 0;
 }
 
 
-void h_insert(HashTable *head，char *key,char *content,long int time_ttl=0){
+int h_insert(HashTable *head,char *key,char *content){
   HashTable *node,*temp;
   if(head==NULL){
       return -1;
@@ -63,26 +63,25 @@ void h_insert(HashTable *head，char *key,char *content,long int time_ttl=0){
   }
 
   temp=head;
-  for(int i=0;p!=NULL;i++){
+  while(temp!=NULL){
     temp=temp->next;
   }
 
   node->key=key;
   node->content=content;
-  node->time_ttl=time_ttl;
   node->next=NULL;
   temp=node;
   return 0;
 }
 
-void h_delete(char *key,HashTable *head){
+int h_delete(char *key,HashTable *head){
    HashTable *node,*temp;
    if(head==NULL){
       return -1;
    }
    node=head;
-   for(int i=0;node!=NULL;i++){
-      if(*content==*(node->content)){
+   while(node!=NULL){
+      if(*key==*(node->key)){
            temp=node;
            node->next=temp->next;
            break;
@@ -98,7 +97,7 @@ HashTable* h_get(char *key,HashTable *head){
       return NULL;
    }
    temp=head;
-   for(int i=0;temp!=NULL;i++){
+   while(temp!=NULL){
       if(*key==*(temp->content)){
          break;
       }else{
