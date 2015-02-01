@@ -17,13 +17,3 @@ struct Node {
    struct Node *pre;
    struct Node *next;
 };
-
-/**
-* HashTable
-*/
-struct HashTable {
-   struct Node *node;
-   struct HashTable *pre;
-   struct HashTable *next;
-};
-~               
