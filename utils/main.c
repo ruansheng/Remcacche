@@ -4,8 +4,12 @@
 typedef struct Node HashTable;
 
 void main(){
-   HashTable *head;
-   int status=h_init(head); 
-   printf("status:%d\n",status);
-   printf("%s",head->content);
+   HashTable *head,*temp;
+   
+   head=h_init(); 
+   
+   int status=h_insert(head,"name","ruansheng");
+   printf("status=%d\n",status);
+  
+   display(head);
 }
