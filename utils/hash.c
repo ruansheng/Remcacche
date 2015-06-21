@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "r_hash.h"
+#include "hash.h"
 
 #define INDEX 128
 
@@ -45,49 +45,21 @@ HashTable* h_init(){
 }
 
 
-int h_insert(HashTable *head,char *key,char *content){
-  HashTable *node,*temp;
-  
-  if(key==NULL){
-    return -1;
-  }
-
-  if(content==NULL){
-    return -1;
-  }
+int h_insert(HashTable *head,long int size){
+  HashTable *node,*temp=head;
 
   node=(HashTable *)malloc(sizeof(HashTable));
   if(node==NULL){
      return -1;
   }
 
-  char *temp_key=(char *)malloc(20);
-  char *temp_content=(char *)malloc(20);
-  strcpy(temp_key,key);
-  strcpy(temp_content,content); 
-
-  node->key=temp_key;
-  node->content=temp_content;
+  node->size=size;
   node->next=NULL;
-  printf("content=%s\n",node->content);
 
-  if(head==NULL){
-      head=node;
-  }
-  
-  printf("head content=%s",head->content);
-/*
-  temp=head;
-  while(temp!=NULL){
-    temp=temp->next;
-  }
-
-  node->key=key;
-  node->content=content;
-  node->next=NULL;
-  printf("content=%s\n",node->content);
   temp->next=node;
-  */ 
+  
+  printf("head size=%ld\n",node->size);
+  
   return 0;
 }
 
@@ -111,8 +83,9 @@ int h_delete(char *key,HashTable *head){
 void display(HashTable *head){
   printf("%s\n",head->content);
   HashTable *temp;
-  for(temp=head->next;temp!=NULL;temp=temp->next){
-     printf("content=%s\n",temp->content);
+  temp=head;
+  for(temp=temp->next;temp!=NULL;temp=temp->next){
+     printf("size=%ld\n",temp->size);
   }
 }
 

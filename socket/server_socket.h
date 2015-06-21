@@ -16,7 +16,8 @@
 #include <fcntl.h>
 #include <sys/shm.h>
 
-#define MYPORT  8889
+#define BINDADDR "127.0.0.1"
+#define BINDPORT  6767
 #define QUEUE   20
 #define BUFFER_SIZE 1024
 

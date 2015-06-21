@@ -1,15 +1,16 @@
 #include <stdio.h>
-#include "r_hash.h"
+#include "hash.h"
 
 typedef struct Node HashTable;
 
-void main(){
+int main(){
    HashTable *head,*temp;
    
    head=h_init(); 
    
-   int status=h_insert(head,"name","ruansheng");
+   int status=h_insert(head,3);
    printf("status=%d\n",status);
-  
-   display(head);
+   printf("%ld\n",head->size);
+//   display(head);
+   return 0;
 }
