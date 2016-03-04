@@ -10,10 +10,18 @@
 * Node
 */
 struct Node {
-   char *key;
    char *content;
-   long int time_ttl;
+   struct List *pre;
+   struct List *next;
+};
+
+/**
+* List
+*/
+struct LIST {
+   char *key;
    long int size;
-   struct Node *pre;
-   struct Node *next;
+   long int ttl;
+   struct Node *left;
+   struct Node *right;
 };

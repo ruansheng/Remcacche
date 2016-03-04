@@ -8,12 +8,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "r_log.h"
-#include "r_time.h"
+#include "log.h"
 
-char * get_time();
+char * get_time(){
+	struct tm *curtime_date;
+	time_t curtime;
+	time(&curtime);
+	static char buffer[128];
+	curtime_date=localtime(&curtime);
+	strftime(buffer,sizeof(buffer),"[%Y-%m-%d %H:%M:%S]",curtime_date);
+	return buffer;
+}
 
-int r_write(char *filepath,char *string){
+int r_write(char *filepath, char *string){
 	FILE *handler;
 	handler=fopen(filepath,"at+");
 	if(handler==NULL){
@@ -21,9 +28,7 @@ int r_write(char *filepath,char *string){
 	}
 	char *buffer;
 	buffer=get_time();
-	fputs(buffer,handler);
-	fputs(string,handler);
-    fputs("\n",handler);
+	fprintf(handler, "%s  %s\n", buffer, string);
 	fclose(handler);
 	return 0;
 }

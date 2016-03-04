@@ -1,19 +1,3 @@
-/*
- * r_hash.c
- *
- *  Created on: Jan 31, 2015
- *      Author: root
- */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "hash.h"
-
-#define INDEX 128
-
-typedef struct Node HashTable;
-
 /**
 * get index
 */
@@ -43,7 +27,6 @@ HashTable* h_init(){
   head->next=NULL;
   return head;
 }
-
 
 int h_insert(HashTable *head,long int size){
   HashTable *node,*temp=head;
