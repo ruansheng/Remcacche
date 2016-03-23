@@ -40,7 +40,6 @@ int start_socket() {
     client_addr.sin_family = AF_INET;
     client_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     client_addr.sin_port = htons(BINDPORT);
-    char buffer[BUFFER_SIZE];
 
     socklen_t length = sizeof(client_addr);
 
@@ -54,6 +53,7 @@ int start_socket() {
 
     	printf("accept success...\n");
 
+        char buffer[BUFFER_SIZE];
         memset(buffer,0,sizeof(buffer));
         int len = recv(conn, buffer, sizeof(buffer),0);
         if(strcmp(buffer,"exit\n")==0) {
