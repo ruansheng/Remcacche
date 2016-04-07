@@ -7,14 +7,15 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "server/server_socket.h"
-#include "utils/log.h"
+#include <sys/select.h>
+#include "server.h"
 
 /**
  * in function
  */
 int main(){
-	start_socket();
+    event *ev;
+	loop(ev);
     return 0;
 }
 

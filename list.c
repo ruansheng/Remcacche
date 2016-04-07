@@ -26,14 +26,14 @@ List * init(List *list){
 /**
 * lpop
 */
-int lpop(List *list, char *key){
+char * lpop(List *list, char *key){
 	List *head = list;
 	Node *node = NULL;
 	Node *pnode = NULL;
     if(head->next == NULL){
        return 0;
     }
-	int tmp = 0;
+	char *tmp;
 	
     head = head->next;
 	while(head) {
@@ -59,14 +59,14 @@ int lpop(List *list, char *key){
 /**
 * rpop
 */
-int rpop(List *list, char *key){
+char * rpop(List *list, char *key){
 	List *head = list;
 	Node *node = NULL;
 	Node *pnode = NULL;
     if(head->next == NULL){
-       return 0;
+       return "\0";
     }
-	int tmp = 0;
+	char *tmp;
 	
     head = head->next;
 	while(head) {
@@ -85,14 +85,14 @@ int rpop(List *list, char *key){
 		}
 		head = head->next;
 	}
-	
+	printf("data: %s \n", tmp);
 	return tmp;
 }
 
 /**
 * lpush
 */
-int lpush(List *list, char *key, int content){
+int lpush(List *list, char *key, char *content){
 	List * head = NULL;
 	List * tmp = NULL;
 	List * this_tmp = NULL;
@@ -187,7 +187,7 @@ int lpush(List *list, char *key, int content){
 /**
 * rpush
 */
-int rpush(List *list, char *key, int content){
+int rpush(List *list, char *key, char * content){
 	List * head = NULL;
 	List * tmp = NULL;
 	List * this_tmp = NULL;
@@ -213,7 +213,8 @@ int rpush(List *list, char *key, int content){
 			free(new_list_item);
 			return -1;
 		}
-		new_node->content = content;
+		new_node->content = (char *)malloc(sizeof(content));
+		strcpy(new_node->content, content);
 		new_node->pre = NULL;
 		new_node->next = NULL;
 
@@ -250,7 +251,8 @@ int rpush(List *list, char *key, int content){
 				free(this_tmp);
 				return -1;
 			}
-			new_node->content = content;
+			new_node->content = (char *)malloc(sizeof(content));
+			strcpy(new_node->content, content);
 			new_node->pre = NULL;
 			new_node->next = NULL;
 			
@@ -268,7 +270,8 @@ int rpush(List *list, char *key, int content){
 			
 			node = this_tmp->right;
 			
-			new_node->content = content;
+			new_node->content = (char *)malloc(sizeof(content));
+			strcpy(new_node->content, content);
 			new_node->pre = node;			
 			new_node->next = NULL;
 			node->next = new_node;
@@ -315,7 +318,7 @@ void display(List *list, char *key){
 			node = head->left;
 			int i;
 		    for(i = 0; i < head->length; i++){
-		        printf("%d   \n", node->content);
+		        printf("%s   \n", node->content);
 				node = node->next;
 		    }
 			printf("---------------------------------\n");
